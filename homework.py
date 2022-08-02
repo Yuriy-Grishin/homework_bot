@@ -74,7 +74,7 @@ def send_message(bot, message):
 
 
 def get_api_answer(current_timestamp):
-    """Отправка запроса в Яндекс.Практикум"""
+    """Отправка запроса в Яндекс.Практикум."""
     headers = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
     timestamp = current_timestamp or int(time.time())
     params = {'from_date': timestamp}
@@ -94,7 +94,7 @@ def get_api_answer(current_timestamp):
 
 
 def check_response(response):
-    """Проверка запроса"""
+    """Проверка запроса."""
     try:
         homeworks = response['homeworks']
     except KeyError:
@@ -111,7 +111,7 @@ def check_response(response):
 
 
 def parse_status(homework):
-    """Проверка статуса на изменение"""
+    """Проверка статуса на изменение."""
     try:
         homework_status = homework['status']
         homework_name = homework['homework_name']
@@ -135,7 +135,7 @@ def parse_status(homework):
 
 
 def check_tokens():
-    """Проверка доступа по токену"""
+    """Проверка доступа по токену."""
     without_tokens = (
         'Остановка запроса из-за остсутствия переменной')
     with_tokens = True
@@ -155,7 +155,6 @@ def check_tokens():
 
 def main():
     """Основная логика работы бота."""
-
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     current_timestamp = int(time.time())
     last_response = ''
