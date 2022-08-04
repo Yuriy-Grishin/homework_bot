@@ -72,18 +72,17 @@ def check_response(response):
     """Проверка запроса."""
     logging.info('Начало проверки запроса')
     if not response:
-        raise KeyError('Отсутствует ответ')
-    # Если без костыля ниже, то не проходит тест:
-    # if not isinstance(response, dict):
-    #     raise KeyError('Ответ не в форме словаря')
-    if isinstance(response, list) and len(response) == 1:
-        response = response[0]
+        raise TypeError('Отсутствует ответ')
+    if not isinstance(response, dict):
+        raise TypeError('Ответ не в форме словаря')
+    # if isinstance(response, list) and len(response) == 1:
+    #     response = response[0]
     if 'homeworks' not in response or 'current_date' not in response:
-        raise KeyError('В ответе нет homeworks" или "current_date"')
-    homeworks = response.get('homeworks', [])
+        raise TypeError('В ответе нет homeworks" или "current_date"')
+    homeworks = response.get('homeworks')
     if not isinstance(homeworks, list):
-        raise KeyError('В ответе под ключом "homeworks" не список.'
-                       f'response = {response}.')
+        raise TypeError('В ответе под ключом "homeworks" не список.'
+                        f'response = {response}.')
     return homeworks
 
 
